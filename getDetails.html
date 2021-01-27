@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Profile | Stretch Inc.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/dependencies.js" ></script>
+</head>
+
+<body class="loading" data-layout="detached"
+    data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+
+    <!-- Topbar Start -->
+    <div class="navbar-custom topnav-navbar topnav-navbar-dark">
+        <div class="container-fluid">
+
+            <!-- LOGO -->
+            <a href="index.html" class="topnav-logo">
+                <span class="topnav-logo-lg">
+                    <!-- <img src="assets/images/logo-light.svg" alt="" height="16"> -->
+                    <h2 class="text-white" style="margin-top: 20px;">stretch inc.</h2>
+                </span>
+                <span class="topnav-logo-sm">
+                    <img src="assets/images/logo-light.svg" alt="" height="16">
+                </span>
+            </a>
+
+            <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+                <li class="dropdown notification-list d-lg-none">
+                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="false" aria-expanded="false">
+                        <i class="dripicons-search noti-icon"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
+                        <form class="p-3">
+                            <input type="text" class="form-control" placeholder="Search ..."
+                                aria-label="Recipient's username">
+                        </form>
+                    </div>
+                </li>
+
+                <li class="dropdown notification-list topbar-dropdown d-none d-lg-block">
+                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" id="topbar-languagedrop"
+                        href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span
+                            class="align-middle">English</span> <i class="mdi mdi-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu"
+                        aria-labelledby="topbar-languagedrop">
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span
+                                class="align-middle">German</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span
+                                class="align-middle">Italian</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span
+                                class="align-middle">Spanish</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span
+                                class="align-middle">Russian</span>
+                        </a>
+                    </div>
+                </li>
+
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
+                        id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="account-user-avatar">
+                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                        </span>
+                        <span>
+                            <span class="account-user-name">Dominic Keller</span>
+                            <span class="account-position">Founder</span>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
+                        aria-labelledby="topbar-userdrop">
+                        <!-- item-->
+                        <div class=" dropdown-header noti-title">
+                            <h6 class="text-overflow m-0">Welcome !</h6>
+                        </div>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="mdi mdi-account-circle mr-1"></i>
+                            <span>My Account</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="mdi mdi-account-edit mr-1"></i>
+                            <span>Settings</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="mdi mdi-lifebuoy mr-1"></i>
+                            <span>Support</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="mdi mdi-lock-outline mr-1"></i>
+                            <span>Lock Screen</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="mdi mdi-logout mr-1"></i>
+                            <span>Logout</span>
+                        </a>
+
+                    </div>
+                </li>
+
+            </ul>
+            <a class="button-menu-mobile disable-btn">
+                <div class="lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- end Topbar -->
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <!-- Begin page -->
+        <div class="wrapper">
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left-side-menu left-side-menu-detached">
+                <div class="leftbar-user">
+                    <a href="javascript: void(0);">
+                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/supergirl-melissa-benoist-1574896368.jpg?crop=0.733xw:0.489xh;0.139xw,0.0306xh&resize=480:*"
+                            alt="user-image" height="150" class="rounded-circle shadow-sm" style="margin-top: 50px;">
+                        <span class="leftbar-user-name" id="username-sub1"></span>
+                    </a>
+                </div>
+                <!--- Sidemenu -->
+                <ul class="metismenu side-nav">
+                    <!-- <li class="side-nav-title side-nav-item">Apps</li> -->
+                    <li class="side-nav-item">
+                        <a href="profile.html" class="side-nav-link">
+                            <i class="mdi mdi-account-circle mr-1"></i>
+                            <span> Profile </span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="appointment.html" class="side-nav-link">
+                            <i class="mdi mdi-timetable"></i>
+                            <span> Appointment </span>
+                        </a>
+                    </li>
+                    <br>
+                    <!-- <li class="side-nav-item">
+                        <a href="logout.html" class="side-nav-link">
+                            <i class="mdi mdi-arrow-left-bold-circle-outline"></i>
+                            <span> Logout </span>
+                        </a>
+                    </li> -->
+                    <li class="side-nav-item" id="logoutBtn" style="margin-left: 20px;">
+                        <button type="button" class="btn btn-outline-secondary btn-rounded " onclick="logoutpage()">
+                            <i class="mdi mdi-arrow-left-bold-circle-outline"></i>
+                            <span> Logout </span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!-- Left Sidebar End -->
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+
+                                <h4 class="page-title">Complete Profile</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <!-- end row -->
+                    <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <!-- Personal-Information -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="" method="POST" id="profile_page">
+                                        <div class="form-group">
+                                            <label for="">Name</label>
+                                            <input type="text" id="name" class="form-control" placeholder="Name" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Email</label>
+                                            <input type="email" id="email" class="form-control" placeholder="Email" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Phone number</label>
+                                            <input type="number" id="phoneNum" class="form-control"
+                                                placeholder="Phone number" onkeyup="limitPhone(this)" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Postcode</label>
+                                            <input type="text" class="form-control" id="postcode" placeholder="Postcode"
+                                                onkeyup="limitPostcode(this)" />
+                                        </div>
+
+                                        <fieldset group="gender" class="pb-3 pt-2">
+                                            <label for="">Gender</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                    value="male" onclick="hidebox(0)" />
+                                                <label class="form-check-label" for="male"> Male </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                    value="female" onclick="hidebox(1)" checked />
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </fieldset>
+
+                                        <div class="form-group pb-2">
+                                            <label for="">Do you have any allergies or injuries? Are you currently
+                                                taking
+                                                any medication? Are you hyper mobile?</label>
+                                            <input type="text" id="allergies" class="form-control" placeholder="" />
+                                        </div>
+
+                                        <fieldset group="pacemaker" class="pb-3">
+                                            <label for="">Do you have pacemaker?</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pacemaker"
+                                                    id="pacemaker-yes" value="1" />
+                                                <label class="form-check-label" for="pacemaker-yes">Yes</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pacemaker"
+                                                    id="pacemaker-no" value="0" checked />
+                                                <label class="form-check-label" for="pacemaker-no">No</label>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset group="iud" class="pb-3">
+                                            <label for="">Do you have an Intrauterine device (IUD)?</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="iud" id="iud-yes"
+                                                    value="1" />
+                                                <label class="form-check-label" for="iud-yes">Yes</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="iud" id="iud-no"
+                                                    value="0" checked />
+                                                <label class="form-check-label" for="iud-no">No</label>
+                                            </div>
+                                        </fieldset>
+
+                                        <div class="form-group pb-2">
+                                            <label for="">Have you had any surgeries or any broken bones or strained or
+                                                torn muscles or ligaments inpast 6 months?</label>
+                                            <input type="text" id="surgeries" class="form-control" />
+                                        </div>
+
+                                        <fieldset group="pregnant" class="pb-3" id="pregnant-check">
+                                            <label for="">Are you pregnant or could be?</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pregnant"
+                                                    id="pregnant-yes" value="1" />
+                                                <label class="form-check-label" for="pregnant-yes">Yes</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pregnant"
+                                                    id="pregnant-no" value="0" checked />
+                                                <label class="form-check-label" for="pregnant-no">No</label>
+                                            </div>
+                                        </fieldset>
+
+                                        <div class="form-group pb-2">
+                                            <label for="">Are there any specific areas you would like your
+                                                strectchologist to focus on?</label>
+                                            <input type="text" id="focus" class="form-control" />
+                                        </div>
+
+                                        <p id="errorMessage" class="text-danger font-weight-bold"></p>
+
+                                        <button class="btn btn-primary btn-block" id="" type="submit">
+                                            <span id="registration-button-text"> Submit </span>
+                                            <div id="registration-loader"
+                                                class="spinner-border spinner-border-sm text-white d-none"
+                                                role="status">
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Personal-Information -->
+
+
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- End Content -->
+
+                    <!-- Footer Start -->
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    stretch inc.
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-right footer-links d-none d-md-block">
+                                        <a href="javascript: void(0);">About</a>
+                                        <a href="javascript: void(0);">Contact Us</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- end Footer -->
+
+                </div> <!-- content-page -->
+
+            </div> <!-- end wrapper-->
+        </div>
+
+        <!-- third party js -->
+        <script src="assets/js/vendor/Chart.bundle.min.js"></script>
+        <!-- third party js ends -->
+
+        <!-- demo app -->
+        <!-- end demo js-->
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+        <!--bundle-->
+        <!-- <script src="assets/js/vendor.min.js"></script>
+        <script src="assets/js/app.min.js"></script> -->
+
+        <script src="js/profile.js"></script>
+        <script src="js/logout.js"></script>
+
+</body>
+
+</html>

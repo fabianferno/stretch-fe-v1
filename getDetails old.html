@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Typeform | Stretch Inc.</title>
+  <script src="js/dependencies.js"></script>
+</head>
+
+<body class="bg-dark container">
+  <div class="d-flex justify-content-center p-2">
+    <div style="max-width: 500px" class="card">
+      <div class="card-body">
+        <form action="" method="POST" id="profile_page">
+          <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Name" />
+          </div>
+
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" id="email" class="form-control" placeholder="Email" />
+          </div>
+
+          <div class="form-group">
+            <label for="">Phone number</label>
+            <input type="number" id="phoneNum" class="form-control" placeholder="Phone number"
+              onkeyup="limitPhone(this)" />
+          </div>
+
+          <div class="form-group">
+            <label for="">Postcode</label>
+            <input type="text" class="form-control" id="postcode" placeholder="Postcode"
+              onkeyup="limitPostcode(this)" />
+          </div>
+
+          <fieldset group="gender" class="pb-3 pt-2">
+            <label for="">Gender</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="male" onclick="hidebox(0)" />
+              <label class="form-check-label" for="male"> Male </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="female" onclick="hidebox(1)"
+                checked />
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+          </fieldset>
+
+          <div class="form-group pb-2">
+            <label for="">Do you have any allergies or injuries? Are you currently taking
+              any medication? Are you hyper mobile?</label>
+            <input type="text" id="allergies" class="form-control" placeholder="" />
+          </div>
+
+          <fieldset group="pacemaker" class="pb-3">
+            <label for="">Do you have pacemaker?</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="pacemaker" id="pacemaker-yes" value="1" />
+              <label class="form-check-label" for="pacemaker-yes">Yes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="pacemaker" id="pacemaker-no" value="0" checked />
+              <label class="form-check-label" for="pacemaker-no">No</label>
+            </div>
+          </fieldset>
+
+          <fieldset group="iud" class="pb-3">
+            <label for="">Do you have an Intrauterine device (IUD)?</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="iud" id="iud-yes" value="1" />
+              <label class="form-check-label" for="iud-yes">Yes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="iud" id="iud-no" value="0" checked />
+              <label class="form-check-label" for="iud-no">No</label>
+            </div>
+          </fieldset>
+
+          <div class="form-group pb-2">
+            <label for="">Have you had any surgeries or any broken bones or strained or
+              torn muscles or ligaments inpast 6 months?</label>
+            <input type="text" id="surgeries" class="form-control" />
+          </div>
+
+          <fieldset group="pregnant" class="pb-3" id="pregnant-check">
+            <label for="">Are you pregnant or could be?</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="pregnant" id="pregnant-yes" value="1" />
+              <label class="form-check-label" for="pregnant-yes">Yes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="pregnant" id="pregnant-no" value="0" checked />
+              <label class="form-check-label" for="pregnant-no">No</label>
+            </div>
+          </fieldset>
+
+          <div class="form-group pb-2">
+            <label for="">Are there any specific areas you would like your
+              strectchologist to focus on?</label>
+            <input type="text" id="focus" class="form-control" />
+          </div>
+
+          <p id="errorMessage" class="text-danger font-weight-bold"></p>
+
+          <button class="btn btn-primary btn-block" id="" type="submit">
+            <span id="registration-button-text"> Submit </span>
+            <div id="registration-loader" class="spinner-border spinner-border-sm text-white d-none" role="status">
+            </div>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- end demo js-->
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+  <!-- <script src="js/getdetails.js"></script> -->
+</body>
+
+</html>
