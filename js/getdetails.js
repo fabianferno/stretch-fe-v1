@@ -13,43 +13,30 @@
 // }
 // firebase.analytics();
 //get elements
-const auth = firebase.auth();
-firebase.auth().onAuthStateChanged(function (userauth) {
-  if (userauth) {
-    // window.location.replace("getDetails.html");
-    $.ajax({
-      type: "POST",
-      url: APIRoute + "check-complete-profile.php",
-      datatype: "html",
-      data: {
-        uid: localStorage.uid,
-        token: localStorage.idToken,
-      },
-      success: function (res) {
-        console.log(res);
-        var response = JSON.parse(res);
-        if (response == "no") {
-          // window.location.replace("getDetails.html");
-        } else if (response == "yes") {
-          window.location.replace("profile.html");
-        } else if (
-          response == "invalid-auth" ||
-          response == "failed" ||
-          response == ""
-        ) {
-          // window.location.replace("index.html");
-          logoutpage();
-        }
-      },
-      error: function (error) {
-        console.log(error);
-        // window.location.replace("index.html");
-        logoutpage();
-      },
-    });
-  } else {
-    window.location.replace("index.html");
-  }
+
+$.ajax({
+  type: "POST",
+  url: APIRoute + "check-complete-profile.php",
+  datatype: "html",
+  data: {
+    uid: localStorage.uid,
+    token: localStorage.idToken,
+  },
+  success: function (res) {
+    console.log(res);
+    var response = JSON.parse(res);
+    if (response == "yes") {
+      window.location.replace("profile.html");
+    } else if (response == "no") {
+      window.location.replace("getDetails.html");
+      // logoutpage();
+    }
+  },
+  error: function (error) {
+    console.log(error);
+    // window.location.replace("index.html");
+    logoutpage();
+  },
 });
 
 function hidebox(x) {
