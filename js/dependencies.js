@@ -20,17 +20,15 @@ csslibs.forEach((value) => {
   link.href = value;
   document.head.appendChild(link);
 });
-window.onload = () => {
-  jslibs.forEach((value) => {
-    var child = document.createElement("script");
-    child.src = value;
-    child.setAttribute("defer", true);
-    child.setAttribute("async", false);
-    child.type = "application/javascript";
-    document.getElementById("script").appendChild(child);
-  });
-};
+jslibs.forEach((value) => {
+  var child = document.createElement("script");
+  child.src = value;
+  child.setAttribute("defer", true);
+  child.setAttribute("async", false);
+  child.type = "application/javascript";
+  document.head.appendChild(child);
+});
 
-var APIRoute = "https://api-stretch.pattarai.in/";
+// var APIRoute = "https://api-stretch.pattarai.in/";
 
-// var APIRoute = "http://localhost/stretch-api-v1/";
+var APIRoute = "http://localhost/stretch-api-v1/";
