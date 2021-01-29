@@ -7,9 +7,9 @@ var csslibs = [
 var jslibs = [
   "assets/js/vendor.min.js", // bundle
   "assets/js/app.min.js", // bundle
-  "https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js",
-  "https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js",
-  "https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js",
+  // "https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js",
+  // "https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js",
+  // "https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js",
 ];
 
 csslibs.forEach((value) => {
