@@ -95,7 +95,6 @@ profile_page.addEventListener("submit", (e) => {
   var max_chars = 10;
   const email = profile_page["email"].value;
   const phoneNum = profile_page["phoneNum"].value;
-  phoneNum = phoneNum.value.substring(0, max_chars);
 
   const postcode1 = profile_page["postcode"].value;
   const postcode = emptyStringcheck(postcode1).substring(0, max_chars);
@@ -116,9 +115,9 @@ profile_page.addEventListener("submit", (e) => {
 
   var pacemaker = $('input[name="pacemaker"]:checked').val();
 
-  var iud = 'input[name="iud"]:checked'.val();
+  var iud = $('input[name="iud"]:checked').val();
 
-  var pregnant = 'input[name="pregnant"]:checked'.val();
+  var pregnant = $('input[name="pregnant"]:checked').val();
 
   // Highlighting the input boxes red if they are empty
   if (name === "") {
