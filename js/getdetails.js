@@ -80,13 +80,13 @@ profile_page.addEventListener("submit", (e) => {
     return values;
   }
 
-  function checkedRadio(ans) {
-    for (i = 0; i < ans.length; i++) {
-      if (ans[i].checked) {
-        return ans[i].value;
-      }
-    }
-  }
+  // function checkedRadio(ans) {
+  //   for (i = 0; i < ans.length; i++) {
+  //     if (ans[i].checked) {
+  //       return ans[i].value;
+  //     }
+  //   }
+  // }
 
   // Getting text input and checking if they are empty spaces
   const name1 = profile_page["name"].value;
@@ -110,17 +110,15 @@ profile_page.addEventListener("submit", (e) => {
   const focus = emptyStringcheck(focus1);
 
   // Getting radio button inputs
-  var test1 = document.getElementsByName("gender");
-  var gender = checkedRadio(test1);
 
-  var test2 = document.getElementsByName("pacemaker");
-  var pacemaker = checkedRadio(test2);
+  var gender = $('input[name="gender"]:checked').val();
+  console.log(gender);
 
-  var test3 = document.getElementsByName("iud");
-  var iud = checkedRadio(test3);
+  var pacemaker = $('input[name="pacemaker"]:checked').val();
 
-  var test4 = document.getElementsByName("pregnant");
-  var pregnant = checkedRadio(test4);
+  var iud = 'input[name="iud"]:checked'.val();
+
+  var pregnant = 'input[name="pregnant"]:checked'.val();
 
   // Highlighting the input boxes red if they are empty
   if (name === "") {
