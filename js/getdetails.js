@@ -57,13 +57,13 @@ function hidebox(x) {
     document.getElementById("pregnant-check").classList.remove("d-none");
   }
 }
-function limitPhone(element) {
-  var max_chars = 10;
+// function limitPhone(element) {
+//   var max_chars = 10;
 
-  if (element.value.length > max_chars) {
-    element.value = element.value.substring(0, max_chars);
-  }
-}
+//   if (element.value.length > max_chars) {
+//     element.value = element.value.substring(0, max_chars);
+//   }
+// }
 function limitPostcode(element) {
   var max_chars = 8;
 
@@ -94,6 +94,7 @@ profile_page.addEventListener("submit", (e) => {
 
   const email = profile_page["email"].value;
   const phoneNum = profile_page["phoneNum"].value;
+  phoneNum = phoneNum.value.substring(0, max_chars);
 
   const postcode1 = profile_page["postcode"].value;
   const postcode = emptyStringcheck(postcode1);
