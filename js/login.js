@@ -1,23 +1,25 @@
 // Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBHPx5ij0m6J8LdAZlpzCAjoF2mJDDC2hk",
-  authDomain: "stretch-pattarai.firebaseapp.com",
-  projectId: "stretch-pattarai",
-  storageBucket: "stretch-pattarai.appspot.com",
-  messagingSenderId: "1046668280702",
-  appId: "1:1046668280702:web:a17d1559f809831d8e692f",
-  measurementId: "G-LS9VD8ZZQC",
-};
-var email,photoUrl,uid,emailVerified;
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+// var firebaseConfig = {
+//   apiKey: "AIzaSyBHPx5ij0m6J8LdAZlpzCAjoF2mJDDC2hk",
+//   authDomain: "stretch-pattarai.firebaseapp.com",
+//   projectId: "stretch-pattarai",
+//   storageBucket: "stretch-pattarai.appspot.com",
+//   messagingSenderId: "1046668280702",
+//   appId: "1:1046668280702:web:a17d1559f809831d8e692f",
+//   measurementId: "G-LS9VD8ZZQC",
+// };
+// var email, photoUrl, uid, emailVerified;
+// // Initialize Firebase
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(firebaseConfig);
+// }
+// firebase.analytics();
 //get elements
 const auth = firebase.auth();
 firebase.auth().onAuthStateChanged(function (userauth) {
   if (userauth) {
-    localStorage.idToken=userauth.ya;
-    localStorage.uid=userauth.uid;
+    localStorage.idToken = userauth.ya;
+    localStorage.uid = userauth.uid;
     window.location.replace("profile.html");
   } else {
     const loginForm = document.querySelector("#login-form");
@@ -47,7 +49,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
           .auth()
           .signInWithEmailAndPassword(email, password)
           .then((user) => {
-            // Signed in            
+            // Signed in
             window.location.replace("profile.html");
           })
           .catch((error) => {
@@ -70,7 +72,6 @@ firebase.auth().onAuthStateChanged(function (userauth) {
         }
       });
     });
-
   }
 });
 
@@ -99,8 +100,7 @@ function signInWithGoogle() {
       };
       $.ajax({
         type: "POST",
-        url:
-          APIRoute + "register.php",
+        url: APIRoute + "register.php",
         datatype: "html",
         data: {
           uid: localStorage.uid,
@@ -186,8 +186,7 @@ function signInWithfacebook() {
           localStorage.idToken = idTokenSecure_user;
           $.ajax({
             type: "POST",
-            url:
-              APIRoute + "register.php",
+            url: APIRoute + "register.php",
             datatype: "html",
             data: {
               uid: localStorage.uid,
@@ -272,10 +271,8 @@ function signInWithfacebook() {
                 auth_provider_user: auth_provider,
               };
               $.ajax({
-                
                 type: "POST",
-                url:
-                  APIRoute + "register.php",
+                url: APIRoute + "register.php",
                 datatype: "html",
                 data: {
                   uid: localStorage.uid,
@@ -286,7 +283,7 @@ function signInWithfacebook() {
                   console.log(jsonparsecont);
                   if (jsonparsecont == "failed") {
                     var userdel = firebase.auth().currentUser;
-    
+
                     userdel
                       .delete()
                       .then(function () {
@@ -303,10 +300,10 @@ function signInWithfacebook() {
                     window.location.replace("getDetails.html");
                   }
                 },
-    
+
                 error: function (error) {
                   var userdel = firebase.auth().currentUser;
-    
+
                   userdel
                     .delete()
                     .then(function () {
@@ -317,7 +314,8 @@ function signInWithfacebook() {
                     .catch(function (error) {
                       // An error happened.
                     });
-                },});
+                },
+              });
               // ...
             })
             .catch(function (error) {
@@ -334,28 +332,27 @@ function signInWithfacebook() {
     });
 }
 
-function resetPassword()
- {
+function resetPassword() {
+  const loginForm = document.querySelector("#login-form");
 
-   const loginForm = document.querySelector('#login-form');
-
-   loginForm.addEventListener('click',(e) => {
-
-     const email = loginForm['emailaddress'].value;
-     if (email != "") {
-         auth.sendPasswordResetEmail(email).then(function() {
-             // Email sent.
-             document.getElementById("error-message").innerHTML = "Email sent to change your password";
-             console.log("email sent");
-           }).catch(function(error) {
-             // An error happened.
-             var errorMessage = error.message;
-             console.log(errorMessage);
-           });
-     }
-     else{
-         window.alert("Please enter the email id to send the reset password link");
-     }
-
-   });
- } 
+  loginForm.addEventListener("click", (e) => {
+    const email = loginForm["emailaddress"].value;
+    if (email != "") {
+      auth
+        .sendPasswordResetEmail(email)
+        .then(function () {
+          // Email sent.
+          document.getElementById("error-message").innerHTML =
+            "Email sent to change your password";
+          console.log("email sent");
+        })
+        .catch(function (error) {
+          // An error happened.
+          var errorMessage = error.message;
+          console.log(errorMessage);
+        });
+    } else {
+      window.alert("Please enter the email id to send the reset password link");
+    }
+  });
+}
