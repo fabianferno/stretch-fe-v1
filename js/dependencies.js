@@ -20,15 +20,16 @@ csslibs.forEach((value) => {
   link.href = value;
   document.head.appendChild(link);
 });
-
-jslibs.forEach((value) => {
-  var child = document.createElement("script");
-  child.src = value;
-  child.setAttribute("defer", true);
-  child.setAttribute("async", false);
-  child.type = "application/javascript";
-  document.head.appendChild(child);
-});
+window.onload = () => {
+  jslibs.forEach((value) => {
+    var child = document.createElement("script");
+    child.src = value;
+    child.setAttribute("defer", true);
+    child.setAttribute("async", false);
+    child.type = "application/javascript";
+    document.getElementById("script").appendChild(child);
+  });
+};
 
 // var APIRoute = "https://api-stretch.pattarai.in/";
 
