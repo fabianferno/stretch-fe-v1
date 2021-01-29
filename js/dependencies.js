@@ -24,6 +24,8 @@ csslibs.forEach((value) => {
 jslibs.forEach((value) => {
   var child = document.createElement("script");
   child.src = value;
+  child.setAttribute("defer", true);
+  child.setAttribute("async", false);
   child.type = "application/javascript";
   document.head.appendChild(child);
 });
