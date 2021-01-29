@@ -64,13 +64,13 @@ function hidebox(x) {
 //     element.value = element.value.substring(0, max_chars);
 //   }
 // }
-function limitPostcode(element) {
-  var max_chars = 8;
+// function limitPostcode(element) {
+//   var max_chars = 8;
 
-  if (element.value.length > max_chars) {
-    element.value = element.value.substring(0, max_chars);
-  }
-}
+//   if (element.value.length > max_chars) {
+//     element.value = element.value.substring(0, max_chars);
+//   }
+// }
 
 profile_page.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -92,12 +92,13 @@ profile_page.addEventListener("submit", (e) => {
   const name1 = profile_page["name"].value;
   const name = emptyStringcheck(name1);
 
+  var max_chars = 10;
   const email = profile_page["email"].value;
   const phoneNum = profile_page["phoneNum"].value;
   phoneNum = phoneNum.value.substring(0, max_chars);
 
   const postcode1 = profile_page["postcode"].value;
-  const postcode = emptyStringcheck(postcode1);
+  const postcode = emptyStringcheck(postcode1).substring(0, max_chars);
 
   const allergies1 = profile_page["allergies"].value;
   const allergies = emptyStringcheck(allergies1);
