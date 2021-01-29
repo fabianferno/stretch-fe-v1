@@ -10,7 +10,6 @@ var jslibs = [
   "https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js",
   "https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js",
   "https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js",
-  "js/firebase.js",
 ];
 
 csslibs.forEach((value) => {
