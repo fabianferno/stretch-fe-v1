@@ -87,9 +87,9 @@ function signInWithGoogle() {
       uid = result.user.uid;
       localStorage.uid = uid;
       idTokenSecure = result.credential.idToken;
+      localStorage.idToken = idTokenSecure;
       photoUrl = result.user.photoURL;
       auth_provider = result.additionalUserInfo.providerId;
-      console.log(result.additionalUserInfo.providerId);
       var user_details = {
         email_user: email,
         email_verified_user: email_verified,
@@ -98,6 +98,8 @@ function signInWithGoogle() {
         photoUrl_user: photoUrl,
         auth_provider_user: auth_provider,
       };
+      console.log(APIRoute + "register.php");
+      console.log(auth_provider);
       $.ajax({
         type: "POST",
         url: APIRoute + "register.php",

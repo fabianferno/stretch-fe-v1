@@ -161,7 +161,7 @@ signupForm.addEventListener("submit", (e) => {
 
                                   $.ajax({
                                     type: "POST",
-                                    url: APIRoute + "/register.php",
+                                    url: APIRoute + "register.php",
                                     datatype: "html",
                                     data: {
                                       uid: localStorage.uid,
