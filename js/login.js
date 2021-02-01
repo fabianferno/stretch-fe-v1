@@ -8,8 +8,20 @@
 //   appId: "1:1046668280702:web:a17d1559f809831d8e692f",
 //   measurementId: "G-LS9VD8ZZQC",
 // };
-// var email, photoUrl, uid, emailVerified;
-// // Initialize Firebase
+var name,
+  email_user,
+  photoUrl_user,
+  email_verified_user,
+  uid_user,
+  idTokenSecure_user,
+  auth_provider_user = "email_and_pass",
+  email,
+  photoUrl,
+  email_verified,
+  uid,
+  idTokenSecure,
+  auth_provider,
+  result; // // Initialize Firebase
 // if (!firebase.apps.length) {
 //   firebase.initializeApp(firebaseConfig);
 // }
@@ -98,7 +110,6 @@ function signInWithGoogle() {
         photoUrl_user: photoUrl,
         auth_provider_user: auth_provider,
       };
-      console.log(APIRoute + "register.php");
       console.log(auth_provider);
       $.ajax({
         type: "POST",

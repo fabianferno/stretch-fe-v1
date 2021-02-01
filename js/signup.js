@@ -292,6 +292,7 @@ function signInWithGoogle() {
       uid = result.user.uid;
       localStorage.uid = uid;
       idTokenSecure = result.credential.idToken;
+      localStorage.idToken = idTokenSecure;
       photoUrl = result.user.photoURL;
       auth_provider = result.additionalUserInfo.providerId;
       //    console.log(result.additionalUserInfo.providerId);
@@ -312,6 +313,7 @@ function signInWithGoogle() {
           token: localStorage.idToken,
         },
         success: function (reg_response) {
+          console.log(reg_response);
           var jsonparsecont = JSON.parse(reg_response);
           console.log(jsonparsecont);
           if (jsonparsecont == "failed") {
