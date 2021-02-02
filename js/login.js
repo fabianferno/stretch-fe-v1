@@ -365,7 +365,9 @@ function resetPassword() {
           console.log(errorMessage);
         });
     } else {
-      window.alert("Please enter the email id to send the reset password link");
+      window.confirm(
+        "Please enter the email id to send the reset password link"
+      );
     }
   });
 }
