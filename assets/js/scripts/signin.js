@@ -13,7 +13,6 @@ var name,
   auth_provider,
   result;
 
-const auth = firebase.auth();
 firebase.auth().onAuthStateChanged(function (userauth) {
   if (userauth) {
     // User already signed in
@@ -65,11 +64,13 @@ firebase.auth().onAuthStateChanged(function (userauth) {
       }
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          // User is signed in.
-          console.log(user);
+          // User already signed in
+          localStorage.idToken = userauth.ya;
+          localStorage.uid = userauth.uid;
+          console.log(user.displayName + "is now signed in.");
         } else {
           // No user is signed in.
-          console.log("not logged in");
+          console.log("User not logged in");
         }
       });
     });
@@ -82,15 +83,15 @@ function signInWithGoogle() {
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
-      console.log(result);
       email = result.user.email;
       email_verified = result.user.emailVerified;
       uid = result.user.uid;
-      localStorage.uid = uid;
       idTokenSecure = result.credential.idToken;
-      localStorage.idToken = idTokenSecure;
       photoUrl = result.user.photoURL;
       auth_provider = result.additionalUserInfo.providerId;
+
+      localStorage.uid = uid;
+      localStorage.idToken = idTokenSecure;
       var user_details = {
         email_user: email,
         email_verified_user: email_verified,
@@ -99,76 +100,79 @@ function signInWithGoogle() {
         photoUrl_user: photoUrl,
         auth_provider_user: auth_provider,
       };
-      console.log(auth_provider);
+      console.log("Sign in with google - successful: " + result);
+      console.log("User Details: " + user_details);
       $.ajax({
         type: "POST",
-        url: APIRoute + "register.php",
+        url: APIRoute + "register-user.php",
         datatype: "html",
         data: {
           uid: localStorage.uid,
           token: localStorage.idToken,
         },
-        success: function (reg_response) {
-          var jsonparsecont = JSON.parse(reg_response);
-          console.log(jsonparsecont);
-          if (jsonparsecont == "failed") {
-            var userdel = firebase.auth().currentUser;
-
-            userdel
-              .delete()
+        success: function (response) {
+          var parsedResponse = JSON.parse(response);
+          console.log(parsedResponse);
+          if (parsedResponse == "failed") {
+            firebase
+              .auth()
+              .currentUser.delete()
               .then(function () {
-                window.location.replace("Signup.html");
                 localStorage.uid = "";
                 localStorage.idToken = "";
+                window.location.replace("signup.html");
               })
               .catch(function (error) {
-                // An error happened.
+                console.log(error);
               });
-          } else if (jsonparsecont == "invalid-auth") {
+          } else if (parsedResponse == "invalid-auth") {
             window.location.replace("index.html");
           } else {
-            window.location.replace("getDetails.html");
+            window.location.replace("getdetails.html");
           }
         },
 
         error: function (error) {
-          var userdel = firebase.auth().currentUser;
-
-          userdel
-            .delete()
+          console.log(error);
+          firebase
+            .auth()
+            .currentUser.delete()
             .then(function () {
               window.location.replace("signup.html");
               localStorage.uid = "";
               localStorage.idToken = "";
             })
             .catch(function (error) {
-              // An error happened.
+              console.log(error);
             });
         },
       });
       // window.location.replace("complete-profile.html");
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      var email = error.email;
-      var credential = error.credential;
+      var error_details = {
+        errorCode: error.code,
+        errorMessage: error.message,
+        email: error.email,
+        credential: error.credential,
+      };
+      console.log(error_details);
     });
 }
+
 function signInWithfacebook() {
   var provider = new firebase.auth.FacebookAuthProvider();
   firebase
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
-      // console.log(result)
       email = result.user.email;
       email_verified = result.user.emailVerified;
       uid = result.user.uid;
       // idTokenSecure = result.credential.idToken;
       photoUrl = result.user.photoURL;
       auth_provider = result.additionalUserInfo.providerId;
-      console.log("Normal Facebook");
+      console.log("Facebook login - successful");
       console.log(result);
       //console.log(result.additionalUserInfo.providerId)
       firebase
@@ -186,49 +190,49 @@ function signInWithfacebook() {
           };
           localStorage.uid = uid_user;
           localStorage.idToken = idTokenSecure_user;
+          console.log(user_details);
           $.ajax({
             type: "POST",
-            url: APIRoute + "register.php",
+            url: APIRoute + "register-user.php",
             datatype: "html",
             data: {
               uid: localStorage.uid,
               token: localStorage.idToken,
             },
-            success: function (reg_response) {
-              var jsonparsecont = JSON.parse(reg_response);
-              console.log(jsonparsecont);
-              if (jsonparsecont == "failed") {
-                var userdel = firebase.auth().currentUser;
-
-                userdel
-                  .delete()
+            success: function (response) {
+              var parsedResponse = JSON.parse(response);
+              console.log(parsedResponse);
+              if (parsedResponse == "failed") {
+                firebase
+                  .auth()
+                  .currentUser.delete()
                   .then(function () {
-                    window.location.replace("signup.html");
                     localStorage.uid = "";
                     localStorage.idToken = "";
+                    window.location.replace("signup.html");
                   })
                   .catch(function (error) {
-                    // An error happened.
+                    console.log(error);
                   });
-              } else if (jsonparsecont == "invalid-auth") {
+              } else if (parsedResponse == "invalid-auth") {
                 window.location.replace("index.html");
               } else {
-                window.location.replace("getDetails.html");
+                window.location.replace("getdetails.html");
               }
             },
 
             error: function (error) {
-              var userdel = firebase.auth().currentUser;
-
-              userdel
-                .delete()
+              console.log(error);
+              firebase
+                .auth()
+                .currentUser.delete()
                 .then(function () {
                   window.location.replace("signup.html");
                   localStorage.uid = "";
                   localStorage.idToken = "";
                 })
                 .catch(function (error) {
-                  // An error happened.
+                  console.log(error);
                 });
             },
           });
@@ -236,18 +240,20 @@ function signInWithfacebook() {
           // ...
         })
         .catch(function (error) {
-          // Handle error
+          console.log(error);
         });
-
-      // window.location.replace("complete-profile.html");
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      var email = error.email;
-      var credential = error.credential;
-      auth.currentUser
-        .linkWithPopup(provider)
+      var error_details = {
+        errorCode: error.code,
+        errorMessage: error.message,
+        email: error.email,
+        credential: error.credential,
+      };
+      console.log(error_details);
+      firebase
+        .auth()
+        .currentUser.linkWithPopup(provider)
         .then(function (result) {
           // Accounts successfully linked.
           email = result.user.email;
@@ -272,6 +278,7 @@ function signInWithfacebook() {
                 photoUrl_user: photoUrl,
                 auth_provider_user: auth_provider,
               };
+              console.log(user_details);
               $.ajax({
                 type: "POST",
                 url: APIRoute + "register.php",
@@ -280,56 +287,54 @@ function signInWithfacebook() {
                   uid: localStorage.uid,
                   token: localStorage.idToken,
                 },
-                success: function (reg_response) {
-                  var jsonparsecont = JSON.parse(reg_response);
-                  console.log(jsonparsecont);
-                  if (jsonparsecont == "failed") {
-                    var userdel = firebase.auth().currentUser;
-
-                    userdel
-                      .delete()
+                success: function (response) {
+                  var parsedResponse = JSON.parse(response);
+                  console.log(parsedResponse);
+                  if (parsedResponse == "failed") {
+                    firebase
+                      .auth()
+                      .currentUser.delete()
                       .then(function () {
                         window.location.replace("signup.html");
                         localStorage.uid = "";
                         localStorage.idToken = "";
                       })
                       .catch(function (error) {
-                        // An error happened.
+                        console.log(error);
                       });
-                  } else if (jsonparsecont == "invalid-auth") {
+                  } else if (parsedResponse == "invalid-auth") {
                     window.location.replace("index.html");
                   } else {
-                    window.location.replace("getDetails.html");
+                    window.location.replace("getdetails.html");
                   }
                 },
 
                 error: function (error) {
-                  var userdel = firebase.auth().currentUser;
-
-                  userdel
-                    .delete()
+                  console.log(error);
+                  firebase
+                    .auth()
+                    .currentUser.delete()
                     .then(function () {
                       window.location.replace("signup.html");
                       localStorage.uid = "";
                       localStorage.idToken = "";
                     })
                     .catch(function (error) {
-                      // An error happened.
+                      console.log(error);
                     });
                 },
               });
               // ...
             })
             .catch(function (error) {
-              // Handle error
+              console.log(error);
             });
 
           // window.location.replace("complete-profile.html");
           // ...
         })
         .catch(function (error) {
-          // Handle Errors here.
-          // ...
+          console.log(error);
         });
     });
 }
@@ -340,7 +345,8 @@ function resetPassword() {
   loginForm.addEventListener("click", (e) => {
     const email = loginForm["emailaddress"].value;
     if (email != "") {
-      auth
+      firebase
+        .auth()
         .sendPasswordResetEmail(email)
         .then(function () {
           // Email sent.
@@ -362,7 +368,6 @@ function resetPassword() {
 }
 
 function logoutpage() {
-  //get elements
   firebase
     .auth()
     .signOut()
@@ -372,6 +377,6 @@ function logoutpage() {
       window.location.replace("logout.html");
     })
     .catch((error) => {
-      // An error happened.
+      console.log(error);
     });
 }
