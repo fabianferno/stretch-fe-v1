@@ -8,16 +8,16 @@ firebase.auth().onAuthStateChanged(function (userauth) {
         uid: localStorage.uid,
         token: localStorage.idToken,
       },
-      success: function (res) {
-        console.log(res);
-        var response = JSON.parse(res);
-        if (response == "no") {
+      success: function (response) {
+        var parsedResponse = JSON.parse(response);
+        if (parsedResponse == "no") {
           window.location.replace("getDetails.html");
-        } else if (response == "invalid-auth" || response == "failed") {
-          // window.location.replace("index.html");
-          // console.log("logout -1");
+        } else if (
+          parsedResponse == "invalid-auth" ||
+          parsedResponse == "failed"
+        ) {
           logoutpage();
-        } else if (response == "yes") {
+        } else if (parsedResponse == "yes") {
           $.ajax({
             type: "POST",
             url: APIRoute + "/profile-info.php",
@@ -27,25 +27,29 @@ firebase.auth().onAuthStateChanged(function (userauth) {
               token: localStorage.idToken,
             },
             success: function (response) {
-              var data = JSON.parse(response);
-              if (data == "invalid_auth") {
+              var parsedResponse = JSON.parse(response);
+              if (parsedResponse == "invalid_auth") {
                 logoutpage();
               } else {
                 var fullname_holders = document.getElementsByClassName(
                   "full-name"
                 );
                 for (i = 0; i < fullname_holders.length; i++) {
-                  fullname_holders[i].innerHTML = data.username;
+                  fullname_holders[i].innerHTML = parsedResponse.username;
                 }
 
                 document.getElementById("username-sub1").innerHTML =
-                  data.username;
-                document.getElementById("phone").innerHTML = data.phone;
-                document.getElementById("postcode").innerHTML = data.postcode;
-                document.getElementById("gender").innerHTML = data.gender;
-                document.getElementById("email").innerHTML = data.email;
+                  parsedResponse.username;
+                document.getElementById("phone").innerHTML =
+                  parsedResponse.phone;
+                document.getElementById("postcode").innerHTML =
+                  parsedResponse.postcode;
+                document.getElementById("gender").innerHTML =
+                  parsedResponse.gender;
+                document.getElementById("email").innerHTML =
+                  parsedResponse.email;
               }
-              if (data == "failed") {
+              if (parsedResponse == "failed") {
                 window.location.replace("getdetails.html");
               }
             },

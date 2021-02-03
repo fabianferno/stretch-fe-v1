@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
     // User already signed in
     localStorage.idToken = userauth.ya;
     localStorage.uid = userauth.uid;
-    console.log(user.displayName + "is already signed in.");
+    console.log(userauth.displayName + "is already signed in.");
     window.location.replace("profile.html");
   } else {
     const loginForm = document.querySelector("#login-form");
