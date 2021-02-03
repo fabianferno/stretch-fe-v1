@@ -31,6 +31,8 @@ firebase.auth().onAuthStateChanged(function (userauth) {
   }
 });
 
+document.getElementById("email").value = firebase.auth().currentUser.email;
+
 function hidebox(x) {
   if (x == 0) {
     document.getElementById("pregnant-check").classList.add("d-none");
@@ -39,9 +41,9 @@ function hidebox(x) {
     document.getElementById("pregnant-check").classList.remove("d-none");
   }
 }
+
 // function limitPhone(element) {
 //   var max_chars = 10;
-
 //   if (element.value.length > max_chars) {
 //     element.value = element.value.substring(0, max_chars);
 //   }
