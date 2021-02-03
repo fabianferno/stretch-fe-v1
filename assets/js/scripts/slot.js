@@ -16,7 +16,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
           // window.location.replace("index.html");
           logoutpage();
         } else {
-          document.getElementById("avatar-img").src = data.pic_url
+          document.getElementById("avatar-img").src = data.pic_url;
           document.getElementById("username-sub1").innerHTML = data.username;
         }
       },
@@ -125,11 +125,11 @@ function addTimes(startTime, endTime) {
     ("0" + seconds).slice(-2)
   );
 }
-function appointmentPage(Slot) {
-  console.log(Slot);
-  if (Slot == 20) {
+function appointmentPage(slot) {
+  console.log(slot);
+  if (slot == 20) {
     SlotTime = "00:20:00";
-  } else if (Slot == 30) {
+  } else if (slot == 30) {
     SlotTime = "00:30:00";
   } else {
     SlotTime = "00:50:00";
@@ -137,7 +137,7 @@ function appointmentPage(Slot) {
 
   document.getElementById("main").innerHTML =
     '<div class="content"><div class="row"><div class="col-12"><div class="page-title-box"><div class="row" style="margin-left: 3px;"><h4 class="page-title">Appointment</h4><i class="page-title card-pricing-icon mdi mdi-chevron-double-right mr-1 " style="font-size: 25px;"></i><h4 class="page-title text-primary">Time</h4></div></div></div></div><div class="row"><div class="col-lg-4"><div class="card"><div class="card-body"><div class="row"><div class="col-lg-12"><form method="POST" id="Appointment"><div class="form-group mb-3"><label for="example-date">Date</label><input class="form-control" id="example-date" type="date" name="date"></div><div class="form-group mb-3"><label for="example-time">Time</label><input class="form-control" id="example-time" type="time" name="time"></div><button class="btn btn-primary" type="button" onclick="bookAppointment(' +
-    Slot +
+    slot +
     ');">Submit</button></form></div></div><span id="slot"></span></div></div>  </div><div class="col-lg-8"><div class="card"><div class="card-body"><div class="col-lg-6"><div class="mt-4 mt-lg-0"><div id="calendar"><iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Europe%2FLondon&amp;src=ZDIzdWNuY2x0cjI4MmRqOTloaWRzaGJuMmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23E67C73&amp;mode=WEEK&amp;title=Available%20Session" style="border: 0" width="600" height="400" frameborder="0" scrolling="no"></iframe> </div></div> </div></div> </div> </div></div></div>';
 }
 
@@ -162,7 +162,7 @@ function bookAppointment(Slot) {
       convertedendTime: convertedendTime,
     },
     success: function (response) {
-      var json_response = JSON.parse(response);
+      var parsedResponse = JSON.parse(response);
       if (json_response.status == "true") {
         document.getElementById("main").innerHTML =
           '<div class="row"><div class="col-12"><div class="page-title-box"><div class="row"><h4 class="page-title">Appointment</h4><i class="page-title card-pricing-icon mdi mdi-chevron-double-right mr-1 "style="font-size: 25px;"></i><h4 class="page-title text-primary">Payment</h4></div></div></div></div><div class="container-fluid"><div class="row justify-content-center"><div class="row"> <div class="col-lg-12"><div class="card" style="min-width: 400px;"><div class="card-body text-center"><h4 class="header-title mb-3">Payment Details</h4><div class="table-responsive text-left"><table class="table mb-0"> <thead class="thead-light"> <tr> <th>Info</th><th>Details</th></tr></thead><tbody><tr><td>Slot</td><td>' +
@@ -183,12 +183,13 @@ function bookAppointment(Slot) {
       } else {
         document.getElementById("slot").innerHTML =
           '<p style="text-align:center;font-weight: 200;font-size:20px;color:#ff6347"><br>' +
-          json_response.available +
+          parsedResponse.available +
           "</p>";
       }
       // window.location.replace("profile.html");
     },
     error: function (error) {
+      console.log(error);
       // window.location.replace("login.html");
     },
   });
@@ -223,7 +224,6 @@ function makePayment() {
 }
 
 function logoutpage() {
-  //get elements
   firebase
     .auth()
     .signOut()
@@ -233,21 +233,6 @@ function logoutpage() {
       window.location.replace("logout.html");
     })
     .catch((error) => {
-      // An error happened.
-    });
-}
-
-function logoutpage() {
-  //get elements
-  firebase
-    .auth()
-    .signOut()
-    .then(() => {
-      localStorage.uid = "";
-      localStorage.idToken = "";
-      window.location.replace("logout.html");
-    })
-    .catch((error) => {
-      // An error happened.
+      console.log(error);
     });
 }

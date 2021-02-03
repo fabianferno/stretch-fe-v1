@@ -9,24 +9,21 @@ firebase.auth().onAuthStateChanged(function (userauth) {
         uid: localStorage.uid,
         token: localStorage.idToken,
       },
-      success: function (res) {
-        console.log(res);
-        document.getElementById("avatar-img").src = data.pic_url
-        var response = JSON.parse(res);
-        if (response == "yes") {
+      success: function (response) {
+        document.getElementById("avatar-img").src = data.pic_url;
+        var parsedResponse = JSON.parse(response);
+        if (parsedResponse == "yes") {
           window.location.replace("profile.html");
         } else if (
-          response == "invalid-auth" ||
-          response == "failed" ||
-          response == ""
+          parsedResponse == "invalid-auth" ||
+          parsedResponse == "failed" ||
+          parsedResponse == ""
         ) {
-          // window.location.replace("index.html");
           logoutpage();
         }
       },
       error: function (error) {
         console.log(error);
-        // window.location.replace("index.html");
         logoutpage();
       },
     });
@@ -195,19 +192,20 @@ profile_page.addEventListener("submit", (e) => {
         iud: iud,
         pregnant: pregnant,
       },
-      success: function (res) {
-        var response = JSON.parse(res);
-        console.log(response);
-        if (response == "success") {
+      success: function (response) {
+        var parsedResponse = JSON.parse(response);
+        console.log(parsedResponse);
+        if (parsedResponse == "success") {
           window.location.replace("profile.html");
-        } else if (response == "invalid_auth" || response == "failed") {
-          // window.location.replace("index.html");
+        } else if (
+          parsedResponse == "invalid_auth" ||
+          parsedResponse == "failed"
+        ) {
           logoutpage();
         }
       },
       error: function (error) {
         console.log(error);
-        // window.location.replace("index.html");
         logoutpage();
       },
     });
@@ -215,7 +213,6 @@ profile_page.addEventListener("submit", (e) => {
 });
 
 function logoutpage() {
-  //get elements
   firebase
     .auth()
     .signOut()
@@ -225,6 +222,6 @@ function logoutpage() {
       window.location.replace("index.html");
     })
     .catch((error) => {
-      // An error happened.
+      console.log(error);
     });
 }

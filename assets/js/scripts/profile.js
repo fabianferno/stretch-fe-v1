@@ -1,8 +1,5 @@
-const auth = firebase.auth();
 firebase.auth().onAuthStateChanged(function (userauth) {
   if (userauth) {
-    // console.log(localStorage.uid);
-    // console.log(localStorage.idToken);
     $.ajax({
       type: "POST",
       url: APIRoute + "check-complete-profile.php",
@@ -29,14 +26,14 @@ firebase.auth().onAuthStateChanged(function (userauth) {
               uid: localStorage.uid,
               token: localStorage.idToken,
             },
-            success: function (res) {
-              var data = JSON.parse(res);
-              if (data == "invalid_auth" || data == "failed") {
+            success: function (response) {
+              var data = JSON.parse(response);
+              if (data == "invalid_auth") {
                 // console.log("logout 0");
                 // window.location.replace("index.html");
                 logoutpage();
               } else {
-                document.getElementById("avatar-img").src = data.pic_url
+                document.getElementById("avatar-img").src = data.pic_url;
                 document.getElementById("username").innerHTML = data.username;
                 document.getElementById("username-sub").innerHTML =
                   data.username;
@@ -47,10 +44,12 @@ firebase.auth().onAuthStateChanged(function (userauth) {
                 document.getElementById("gender").innerHTML = data.gender;
                 document.getElementById("email").innerHTML = data.email;
               }
+              if (data == "failed") {
+                window.location.replace("getdetails.html");
+              }
             },
             error: function (error) {
               console.log(error + "logout 1");
-              // window.location.replace("index.html");
               logoutpage();
             },
           });
@@ -58,19 +57,15 @@ firebase.auth().onAuthStateChanged(function (userauth) {
       },
       error: function (error) {
         console.log(error + "logout 2");
-        // window.location.replace("index.html");
         logoutpage();
       },
     });
   } else {
-    // console.log("logout 3");
-    // window.location.replace("index.html");
     logoutpage();
   }
 });
 
 function logoutpage() {
-  //get elements
   firebase
     .auth()
     .signOut()
@@ -78,9 +73,8 @@ function logoutpage() {
       localStorage.uid = "";
       localStorage.idToken = "";
       window.location.replace("index.html");
-      // console.log("redirect called");
     })
     .catch((error) => {
-      // An error happened.
+      console.log(error);
     });
 }
