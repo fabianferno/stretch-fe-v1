@@ -149,7 +149,7 @@ signupForm.addEventListener("submit", (e) => {
 
                                   $.ajax({
                                     type: "POST",
-                                    url: APIRoute + "register.php",
+                                    url: APIRoute + "register-user.php",
                                     datatype: "html",
                                     data: {
                                       uid: localStorage.uid,
@@ -294,7 +294,7 @@ function signInWithGoogle() {
       };
       $.ajax({
         type: "POST",
-        url: APIRoute + "register.php",
+        url: APIRoute + "register-user.php",
         datatype: "html",
         data: {
           uid: localStorage.uid,
@@ -381,7 +381,7 @@ function signInWithfacebook() {
           localStorage.idToken = idTokenSecure_user;
           $.ajax({
             type: "POST",
-            url: APIRoute + "register.php",
+            url: APIRoute + "register-user.php",
             datatype: "html",
             data: {
               uid: localStorage.uid,
@@ -467,7 +467,7 @@ function signInWithfacebook() {
               };
               $.ajax({
                 type: "POST",
-                url: APIRoute + "register.php",
+                url: APIRoute + "register-user.php",
                 datatype: "html",
                 data: {
                   uid: localStorage.uid,
