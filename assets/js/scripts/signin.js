@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
     // User already signed in
     localStorage.idToken = userauth.ya;
     localStorage.uid = userauth.uid;
-    console.log(userauth.displayName + "is already signed in.");
+    console.log(userauth.displayName + " is already signed in.");
     window.location.replace("profile.html");
   } else {
     const loginForm = document.querySelector("#login-form");
@@ -67,7 +67,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
           // User already signed in
           localStorage.idToken = userauth.ya;
           localStorage.uid = userauth.uid;
-          console.log(user.displayName + "is now signed in.");
+          console.log(user.displayName + " is now signed in.");
         } else {
           // No user is signed in.
           console.log("User not logged in");
@@ -92,6 +92,7 @@ function signInWithGoogle() {
 
       localStorage.uid = uid;
       localStorage.idToken = idTokenSecure;
+
       var user_details = {
         email_user: email,
         email_verified_user: email_verified,
@@ -101,7 +102,7 @@ function signInWithGoogle() {
         auth_provider_user: auth_provider,
       };
       console.log("Sign in with google - successful: " + result);
-      console.log("User Details: " + user_details);
+      console.log("User Details: " + JSON.stringify(user_details));
       $.ajax({
         type: "POST",
         url: APIRoute + "register-user.php",
@@ -147,6 +148,7 @@ function signInWithGoogle() {
             });
         },
       });
+
       // window.location.replace("complete-profile.html");
     })
     .catch((error) => {
