@@ -47,9 +47,9 @@ firebase.auth().onAuthStateChanged(function (userauth) {
         firebase
           .auth()
           .signInWithEmailAndPassword(email, password)
-          .then((user) => {
+          .then((userCredential) => {
             // Signed in
-            console.log(user.displayName + "has signed in.");
+            console.log(userCredential.user.displayName + " has signed in.");
             window.location.replace("profile.html");
           })
           .catch((error) => {
@@ -82,13 +82,13 @@ function signInWithGoogle() {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then((result) => {
-      email = result.user.email;
-      email_verified = result.user.emailVerified;
-      uid = result.user.uid;
-      idTokenSecure = result.credential.idToken;
-      photoUrl = result.user.photoURL;
-      auth_provider = result.additionalUserInfo.providerId;
+    .then((userCredential) => {
+      email = userCredential.user.email;
+      email_verified = userCredential.user.emailVerified;
+      uid = userCredential.user.uid;
+      idTokenSecure = userCredential.credential.idToken;
+      photoUrl = userCredential.user.photoURL;
+      auth_provider = userCredential.additionalUserInfo.providerId;
 
       localStorage.uid = uid;
       localStorage.idToken = idTokenSecure;
@@ -139,9 +139,9 @@ function signInWithGoogle() {
             .auth()
             .currentUser.delete()
             .then(function () {
-              window.location.replace("signup.html");
               localStorage.uid = "";
               localStorage.idToken = "";
+              window.location.replace("signup.html");
             })
             .catch(function (error) {
               console.log(error);
@@ -158,7 +158,7 @@ function signInWithGoogle() {
         email: error.email,
         credential: error.credential,
       };
-      console.log(error_details);
+      console.log(JSON.stringify(error_details));
     });
 }
 
@@ -167,16 +167,14 @@ function signInWithfacebook() {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then((result) => {
-      email = result.user.email;
-      email_verified = result.user.emailVerified;
-      uid = result.user.uid;
-      // idTokenSecure = result.credential.idToken;
-      photoUrl = result.user.photoURL;
-      auth_provider = result.additionalUserInfo.providerId;
+    .then((userCredential) => {
+      email = userCredential.user.email;
+      email_verified = userCredential.user.emailVerified;
+      uid = userCredential.user.uid;
+      idTokenSecure = userCredential.credential.idToken;
+      photoUrl = userCredential.user.photoURL;
+      auth_provider = userCredential.additionalUserInfo.providerId;
       console.log("Facebook login - successful");
-      console.log(result);
-      //console.log(result.additionalUserInfo.providerId)
       firebase
         .auth()
         .currentUser.getIdToken(/* forceRefresh */ true)
@@ -192,7 +190,7 @@ function signInWithfacebook() {
           };
           localStorage.uid = uid_user;
           localStorage.idToken = idTokenSecure_user;
-          console.log(user_details);
+          console.log(JSON.stringify(user_details));
           $.ajax({
             type: "POST",
             url: APIRoute + "register-user.php",
@@ -252,20 +250,19 @@ function signInWithfacebook() {
         email: error.email,
         credential: error.credential,
       };
-      console.log(error_details);
+      console.log(JSON.stringify(error_details));
       firebase
         .auth()
         .currentUser.linkWithPopup(provider)
-        .then(function (result) {
+        .then(function (userCredential) {
           // Accounts successfully linked.
-          email = result.user.email;
-          email_verified = result.user.emailVerified;
-          uid = result.user.uid;
-          idTokenSecure = result.credential.idToken;
-          photoUrl = result.user.photoURL;
-          auth_provider = result.additionalUserInfo.providerId;
-          console.log("Linked Facebook");
-          console.log(result);
+          email = userCredential.user.email;
+          email_verified = userCredential.user.emailVerified;
+          uid = userCredential.user.uid;
+          idTokenSecure = userCredential.credential.idToken;
+          photoUrl = userCredential.user.photoURL;
+          auth_provider = userCredential.additionalUserInfo.providerId;
+          console.log("Linked Facebook - successfully");
           console.log(result.additionalUserInfo.providerId);
           firebase
             .auth()
@@ -280,7 +277,7 @@ function signInWithfacebook() {
                 photoUrl_user: photoUrl,
                 auth_provider_user: auth_provider,
               };
-              console.log(user_details);
+              console.log(JSON.stringify(user_details));
               $.ajax({
                 type: "POST",
                 url: APIRoute + "register.php",
@@ -297,9 +294,9 @@ function signInWithfacebook() {
                       .auth()
                       .currentUser.delete()
                       .then(function () {
-                        window.location.replace("signup.html");
                         localStorage.uid = "";
                         localStorage.idToken = "";
+                        window.location.replace("signup.html");
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -317,9 +314,9 @@ function signInWithfacebook() {
                     .auth()
                     .currentUser.delete()
                     .then(function () {
-                      window.location.replace("signup.html");
                       localStorage.uid = "";
                       localStorage.idToken = "";
+                      window.location.replace("signup.html");
                     })
                     .catch(function (error) {
                       console.log(error);
@@ -362,9 +359,7 @@ function resetPassword() {
           console.log(errorMessage);
         });
     } else {
-      window.confirm(
-        "Please enter the email id to send the reset password link"
-      );
+      window.confirm("Enter the email id linked to your account");
     }
   });
 }
@@ -376,6 +371,7 @@ function logoutpage() {
     .then(() => {
       localStorage.uid = "";
       localStorage.idToken = "";
+      console.log("Logging out...");
       window.location.replace("logout.html");
     })
     .catch((error) => {

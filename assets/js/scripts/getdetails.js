@@ -220,6 +220,7 @@ function logoutpage() {
     .then(() => {
       localStorage.uid = "";
       localStorage.idToken = "";
+      console.log("Logging out...");
       window.location.replace("index.html");
     })
     .catch((error) => {
