@@ -1,18 +1,3 @@
-// var firebaseConfig = {
-//   apiKey: "AIzaSyBHPx5ij0m6J8LdAZlpzCAjoF2mJDDC2hk",
-//   authDomain: "stretch-pattarai.firebaseapp.com",
-//   projectId: "stretch-pattarai",
-//   storageBucket: "stretch-pattarai.appspot.com",
-//   messagingSenderId: "1046668280702",
-//   appId: "1:1046668280702:web:a17d1559f809831d8e692f",
-//   measurementId: "G-LS9VD8ZZQC",
-// };
-// // Initialize Firebase
-// if (!firebase.apps.length) {
-//   firebase.initializeApp(firebaseConfig);
-// }
-// firebase.analytics();
-//get elements
 const auth = firebase.auth();
 firebase.auth().onAuthStateChanged(function (userauth) {
   if (userauth) {
@@ -26,6 +11,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
       },
       success: function (res) {
         console.log(res);
+        document.getElementById("avatar-img").src = data.pic_url
         var response = JSON.parse(res);
         if (response == "yes") {
           window.location.replace("profile.html");
@@ -93,7 +79,7 @@ profile_page.addEventListener("submit", (e) => {
   const name = emptyStringcheck(name1);
 
   var max_chars = 10;
-  const email = profile_page["email"].value;
+  const email = auth.currentUser.email;
   const phoneNum = profile_page["phoneNum"].value;
 
   const postcode1 = profile_page["postcode"].value;

@@ -31,6 +31,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
           // window.location.replace("index.html");
           logoutpage();
         } else {
+          document.getElementById("avatar-img").src = data.pic_url
           document.getElementById("username-sub1").innerHTML = data.username;
         }
       },
