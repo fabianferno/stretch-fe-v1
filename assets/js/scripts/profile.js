@@ -38,7 +38,6 @@ firebase.auth().onAuthStateChanged(function (userauth) {
                 for (i = 0; i < fullname_holders.length; i++) {
                   fullname_holders[i].innerHTML = parsedResponse.username;
                 }
-
                 document.getElementById("username-sub1").innerHTML =
                   parsedResponse.username;
                 document.getElementById("phone").innerHTML =

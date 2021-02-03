@@ -59,48 +59,22 @@ function hidebox(x) {
 profile_page.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  function emptyStringcheck(ans) {
-    const values = ans.replace(/\s/g, "");
-    return values;
-  }
-
-  // function checkedRadio(ans) {
-  //   for (i = 0; i < ans.length; i++) {
-  //     if (ans[i].checked) {
-  //       return ans[i].value;
-  //     }
-  //   }
-  // }
-
   // Getting text input and checking if they are empty spaces
-  const name1 = profile_page["name"].value;
-  const name = emptyStringcheck(name1);
-
-  var max_chars = 10;
+  const name = profile_page["name"].value;
   const email = auth.currentUser.email;
   const phoneNum = profile_page["phoneNum"].value;
 
-  const postcode1 = profile_page["postcode"].value;
-  const postcode = emptyStringcheck(postcode1).substring(0, max_chars);
+  const postcode = profile_page["postcode"].value;
+  const allergies = profile_page["allergies"].value;
 
-  const allergies1 = profile_page["allergies"].value;
-  const allergies = emptyStringcheck(allergies1);
+  const surgeries = profile_page["surgeries"].value;
 
-  const surgeries1 = profile_page["surgeries"].value;
-  const surgeries = emptyStringcheck(surgeries1);
-
-  const focus1 = profile_page["focus"].value;
-  const focus = emptyStringcheck(focus1);
+  const focus = profile_page["focus"].value;
 
   // Getting radio button inputs
-
   var gender = $('input[name="gender"]:checked').val();
-  console.log(gender);
-
   var pacemaker = $('input[name="pacemaker"]:checked').val();
-
   var iud = $('input[name="iud"]:checked').val();
-
   var pregnant = $('input[name="pregnant"]:checked').val();
 
   // Highlighting the input boxes red if they are empty
@@ -202,6 +176,7 @@ profile_page.addEventListener("submit", (e) => {
           parsedResponse == "invalid_auth" ||
           parsedResponse == "failed"
         ) {
+          console.log("invalid-auth or failed");
           logoutpage();
         }
       },
