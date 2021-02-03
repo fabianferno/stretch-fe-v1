@@ -15,7 +15,7 @@
      <link rel="stylesheet" href="/assets/css/app-modern.min.css" />
 </head>
 
-<body class="authentication-bg pb-0" data-layout-config='{"darkMode":false}'>
+<body class="authentication-bg pb-0" >
 
     <div class="auth-fluid">
         <!--Auth fluid left content -->
@@ -23,15 +23,6 @@
             <div class="align-items-center d-flex h-100">
                 <div class="card-body">
 
-                    <!-- Logo -->
-                    <div class="auth-brand text-center text-lg-left">
-                        <a href="index.html" class="logo-dark">
-                            <span><img src="assets/images/logo-dark.png" alt="" height="18"></span>
-                        </a>
-                        <a href="index.html" class="logo-light">
-                            <span><img src="assets/images/logo.png" alt="" height="18"></span>
-                        </a>
-                    </div>
 
                     <!-- title-->
                     <h4 class="mt-0">Free Sign Up</h4>
@@ -43,15 +34,15 @@
 
                         <div class="form-group">
                             <label for="emailaddress">Email address</label>
-                            <input class="form-control" type="email" id="emailaddress" placeholder="Enter your email">
+                            <input autocomplete="on" class="form-control" type="email" id="emailaddress" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input class="form-control" type="password" id="password" placeholder="Enter your password">
+                            <input autocomplete="on" class="form-control" type="password" id="password" placeholder="Enter your password">
                         </div>
                         <div class="form-group">
                             <label for="re-type-password">Retype the password</label>
-                            <input class="form-control" type="password" id="re-type-password"
+                            <input autocomplete="on" class="form-control" type="password" id="re-type-password"
                                 placeholder="Retype the password">
                         </div>
                         <div class="form-group">
