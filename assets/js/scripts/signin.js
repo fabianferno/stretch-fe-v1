@@ -65,8 +65,10 @@ firebase.auth().onAuthStateChanged(function (userauth) {
       }
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          // User is signed in.
-          console.log(user);
+          // User already signed in
+          localStorage.idToken = userauth.ya;
+          localStorage.uid = userauth.uid;
+          console.log(user.displayName + "is now signed in.");
         } else {
           // No user is signed in.
           console.log("not logged in");
@@ -82,15 +84,15 @@ function signInWithGoogle() {
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
-      console.log(result);
       email = result.user.email;
       email_verified = result.user.emailVerified;
       uid = result.user.uid;
-      localStorage.uid = uid;
       idTokenSecure = result.credential.idToken;
-      localStorage.idToken = idTokenSecure;
       photoUrl = result.user.photoURL;
       auth_provider = result.additionalUserInfo.providerId;
+
+      localStorage.uid = uid;
+      localStorage.idToken = idTokenSecure;
       var user_details = {
         email_user: email,
         email_verified_user: email_verified,
@@ -99,35 +101,35 @@ function signInWithGoogle() {
         photoUrl_user: photoUrl,
         auth_provider_user: auth_provider,
       };
-      console.log(auth_provider);
+      console.log("Sign in with google - successful: " + result);
+      console.log("User Details: " + user_details);
       $.ajax({
         type: "POST",
-        url: APIRoute + "register.php",
+        url: APIRoute + "register-user.php",
         datatype: "html",
         data: {
           uid: localStorage.uid,
           token: localStorage.idToken,
         },
-        success: function (reg_response) {
-          var jsonparsecont = JSON.parse(reg_response);
-          console.log(jsonparsecont);
-          if (jsonparsecont == "failed") {
-            var userdel = firebase.auth().currentUser;
-
-            userdel
-              .delete()
+        success: function (response) {
+          var parsedResponse = JSON.parse(response);
+          console.log(parsedResponse);
+          if (parsedResponse == "failed") {
+            firebase
+              .auth()
+              .currentUser.delete()
               .then(function () {
-                window.location.replace("Signup.html");
                 localStorage.uid = "";
                 localStorage.idToken = "";
+                window.location.replace("signup.html");
               })
               .catch(function (error) {
-                // An error happened.
+                console.log(error);
               });
-          } else if (jsonparsecont == "invalid-auth") {
+          } else if (parsedResponse == "invalid-auth") {
             window.location.replace("index.html");
           } else {
-            window.location.replace("getDetails.html");
+            window.location.replace("getdetails.html");
           }
         },
 
