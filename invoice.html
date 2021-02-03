@@ -13,22 +13,9 @@
     <!-- UI CSS LIBS -->
     <link rel="stylesheet" href="./assets/css/icons.min.css" />
     <link rel="stylesheet" href="./assets/css/app-modern.min.css" />
-
-    <style>
-      @media only screen and (min-width: 1200px) {
-        #card {
-          margin-left: 240px;
-          margin-right: 250px;
-        }
-      }
-    </style>
   </head>
 
-  <body
-    class="loading"
-    data-layout="detached"
-    data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'
-  >
+  <body class="loading" data-layout="detached">
     <!-- Topbar Start -->
     <div class="navbar-custom topnav-navbar topnav-navbar-dark">
       <div class="container-fluid">
@@ -39,7 +26,7 @@
             <h2 class="text-white" style="margin-top: 20px">stretch inc.</h2>
           </span>
           <span class="topnav-logo-sm">
-            <img src="assets/images/logo-light.svg" alt="" height="16" />
+            <h2 class="text-white" style="margin-top: 20px">stretch inc.</h2>
           </span>
         </a>
 
@@ -128,7 +115,7 @@
           <div class="leftbar-user">
             <a href="javascript: void(0);">
               <img
-                src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/supergirl-melissa-benoist-1574896368.jpg?crop=0.733xw:0.489xh;0.139xw,0.0306xh&resize=480:*"
+                src="https://www.logolynx.com/images/logolynx/b4/b4ef8b89b08d503b37f526bca624c19a.jpeg"
                 alt="user-image"
                 height="150"
                 class="rounded-circle shadow-sm"
@@ -207,20 +194,19 @@
                         <div class="float-left mt-2">
                           <div class="row float-sm-left">
                             <img
-                              src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/supergirl-melissa-benoist-1574896368.jpg?crop=0.733xw:0.489xh;0.139xw,0.0306xh&resize=480:*"
+                              src="https://www.logolynx.com/images/logolynx/b4/b4ef8b89b08d503b37f526bca624c19a.jpeg"
                               alt="user-image"
                               height="150"
                               class="rounded-circle shadow-sm"
                               style="margin-top: 50px"
                             />
-                            <!-- <p><b><span id="username-sub1"></span></b></p> -->
 
                             <div
                               class="column"
                               style="margin-top: 60px; margin-left: 20px"
                             >
                               <p style="margin-top: 10px; font-size: 22px">
-                                <b id="username-sub1">Vasanth</b>
+                                <b class="full-name" id="username-sub1"></b>
                               </p>
                               <p style="margin-top: 10px" id="gender">Male</p>
                             </div>
@@ -260,8 +246,8 @@
                               <tr>
                                 <td><b>Leg Stretch</b> <br /></td>
                                 <td>25 mins</td>
-                                <td>$1799.00</td>
-                                <td class="text-right">$1799.00</td>
+                                <td>$60.00</td>
+                                <td class="text-right">$60.00</td>
                               </tr>
                             </tbody>
                           </table>
@@ -277,13 +263,13 @@
                         <div class="float-right mt-3 mt-sm-0">
                           <p>
                             <b>Sub-total:</b>
-                            <span class="float-right">$1799.00</span>
+                            <span class="float-right">$6.00</span>
                           </p>
                           <p>
                             <b>VAT (12.5):</b>
-                            <span class="float-right">$10.00</span>
+                            <span class="float-right">$1.00</span>
                           </p>
-                          <h3>$1809.00 USD</h3>
+                          <h3>$61.00 USD</h3>
                         </div>
                         <div class="clearfix"></div>
                       </div>
@@ -315,8 +301,6 @@
               <!-- end col-->
             </div>
           </div>
-          <!-- end row -->
-          <!-- container -->
 
           <!-- Footer Start -->
           <footer class="footer">
@@ -349,5 +333,6 @@
 
     <!-- CONFIG -->
     <script src="./assets/js/scripts/config.js"></script>
+    <script src="./assets/js/scripts/invoice.js"></script>
   </body>
 </html>
