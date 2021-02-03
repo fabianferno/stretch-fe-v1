@@ -29,14 +29,15 @@ firebase.auth().onAuthStateChanged(function (userauth) {
             success: function (response) {
               var data = JSON.parse(response);
               if (data == "invalid_auth") {
-                // console.log("logout 0");
-                // window.location.replace("index.html");
                 logoutpage();
               } else {
-                document.getElementById("avatar-img").src = data.pic_url;
-                document.getElementById("username").innerHTML = data.username;
-                document.getElementById("username-sub").innerHTML =
-                  data.username;
+                var fullname_holders = document.getElementsByClassName(
+                  "full-name"
+                );
+                for (i = 0; i < fullname_holders.length; i++) {
+                  fullname_holders[i].innerHTML = data.username;
+                }
+
                 document.getElementById("username-sub1").innerHTML =
                   data.username;
                 document.getElementById("phone").innerHTML = data.phone;
