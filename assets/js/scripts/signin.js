@@ -16,8 +16,10 @@ var name,
 const auth = firebase.auth();
 firebase.auth().onAuthStateChanged(function (userauth) {
   if (userauth) {
+    // User already signed in
     localStorage.idToken = userauth.ya;
     localStorage.uid = userauth.uid;
+    console.log(user.displayName + "is already signed in.");
     window.location.replace("profile.html");
   } else {
     const loginForm = document.querySelector("#login-form");
@@ -48,13 +50,14 @@ firebase.auth().onAuthStateChanged(function (userauth) {
           .signInWithEmailAndPassword(email, password)
           .then((user) => {
             // Signed in
+            console.log(user.displayName + "has signed in.");
             window.location.replace("profile.html");
           })
           .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage);
-            document.getElementById("error-message").innerHTML = errorMessage;
+            // var errorCode = error.code;
+            console.log(error.message);
+            document.getElementById("error-message").innerHTML =
+              "User not found, Sign Up first.";
             document
               .getElementById("registration-loader")
               .classList.add("d-none");
