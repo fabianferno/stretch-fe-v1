@@ -10,7 +10,6 @@ firebase.auth().onAuthStateChanged(function (userauth) {
         token: localStorage.idToken,
       },
       success: function (response) {
-        document.getElementById("avatar-img").src = data.pic_url;
         var parsedResponse = JSON.parse(response);
         if (parsedResponse == "yes") {
           window.location.replace("profile.html");
