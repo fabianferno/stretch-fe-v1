@@ -5,8 +5,9 @@
     <meta charset="utf-8" />
     <title>Profile | Stretch Inc.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/dependencies.js"></script>
-
+    <!-- UI CSS LIBS -->
+  <link rel="stylesheet" href="/assets/css/icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/app-modern.min.css" />
 </head>
 
 <body class="loading" data-layout="detached"
@@ -321,22 +322,23 @@
 
             </div> <!-- end wrapper-->
         </div>
-        <!-- demo app -->
-        <!-- end demo js-->
-        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
 
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-    https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
-        <!--bundle-->
-        <!-- <script src="assets/js/vendor.min.js"></script>
-        <script src="assets/js/app.min.js"></script> -->
-        <!-- <script src="js/firebase.js"></script> -->
-        <script defer=true async=false src="js/firebase.js"></script>
-        <script async=false defer=true src="js/profile.js"></script>
-        <script async=false defer=true src="js/logout.js"></script>
+  <!-- scripts begin here -->
+  <script src="/assets/js/lib/vendor.min.js"></script>
+  <script src="/assets/js/lib/app.min.js"></script>
+  <!-- default libraries for UI -->
 
+  <!-- FIREBASE BEGINS -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
+  <!-- FIREBASE ENDS -->
+
+  <!-- CONFIG -->
+  <script src="/assets/js/scripts/config.js"></script>
+
+  <!-- SCRIPT -->
+  <script src="/assets/js/scripts/profile.js"></script>
 </body>
 
 </html>
