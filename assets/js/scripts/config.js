@@ -13,5 +13,5 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-// var APIRoute = "https://api-stretch.pattarai.in/";
-var APIRoute = "http://localhost/stretch-api-v1/";
+var APIRoute = "https://api-stretch.pattarai.in/";
+// var APIRoute = "http://localhost/stretch-api-v1/";

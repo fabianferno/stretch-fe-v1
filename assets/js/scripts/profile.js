@@ -29,6 +29,7 @@ firebase.auth().onAuthStateChanged(function (userauth) {
             success: function (response) {
               var parsedResponse = JSON.parse(response);
               if (parsedResponse == "invalid_auth") {
+                console.log("logout 2");
                 logoutpage();
               } else {
                 var fullname_holders = document.getElementsByClassName(
@@ -61,11 +62,12 @@ firebase.auth().onAuthStateChanged(function (userauth) {
         }
       },
       error: function (error) {
-        console.log(error + "logout 2");
+        console.log(error + "logout 0");
         logoutpage();
       },
     });
   } else {
+    console.log("User not signed in.");
     logoutpage();
   }
 });

@@ -13,7 +13,6 @@ var name,
   auth_provider,
   result;
 
-const auth = firebase.auth();
 const signupForm = document.querySelector("#signup-form");
 
 signupForm.addEventListener("submit", (e) => {
@@ -141,7 +140,8 @@ signupForm.addEventListener("submit", (e) => {
                                   };
 
                                   localStorage.idToken = idToken;
-                                  console.log(user_details);
+                                  localStorage.uid = uid;
+                                  console.log(JSON.stringify(user_details));
 
                                   $.ajax({
                                     type: "POST",
@@ -174,7 +174,7 @@ signupForm.addEventListener("submit", (e) => {
                                         window.location.replace("index.html");
                                       } else {
                                         window.location.replace(
-                                          "getDetails.html"
+                                          "getdetails.html"
                                         );
                                       }
                                     },
@@ -266,17 +266,16 @@ function signInWithGoogle() {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then((result) => {
-      //   console.log(result);
-      email = result.user.email;
-      email_verified = result.user.emailVerified;
-      uid = result.user.uid;
+    .then((userCredential) => {
+      email = userCredential.user.email;
+      email_verified = userCredential.user.emailVerified;
+      uid = userCredential.user.uid;
+      idTokenSecure = userCredential.credential.idToken;
+      photoUrl = userCredential.user.photoURL;
+      auth_provider = userCredential.additionalUserInfo.providerId;
+
       localStorage.uid = uid;
-      idTokenSecure = result.credential.idToken;
       localStorage.idToken = idTokenSecure;
-      photoUrl = result.user.photoURL;
-      auth_provider = result.additionalUserInfo.providerId;
-      //    console.log(result.additionalUserInfo.providerId);
       var user_details = {
         email_user: email,
         email_verified_user: email_verified,
@@ -285,7 +284,7 @@ function signInWithGoogle() {
         photoUrl_user: photoUrl,
         auth_provider_user: auth_provider,
       };
-      console.log(user_details);
+      console.log(JSON.stringify(user_details));
       $.ajax({
         type: "POST",
         url: APIRoute + "register-user.php",
@@ -302,9 +301,9 @@ function signInWithGoogle() {
               .auth()
               .currentUser.delete()
               .then(function () {
-                window.location.replace("Signup.html");
                 localStorage.uid = "";
                 localStorage.idToken = "";
+                window.location.replace("signup.html");
               })
               .catch(function (error) {
                 console.log(error);
@@ -322,9 +321,9 @@ function signInWithGoogle() {
             .auth()
             .currentUser.delete()
             .then(function () {
-              window.location.replace("signup.html");
               localStorage.uid = "";
               localStorage.idToken = "";
+              window.location.replace("signup.html");
             })
             .catch(function (error) {
               console.log(error);
@@ -340,7 +339,7 @@ function signInWithGoogle() {
         email: error.email,
         credential: error.credential,
       };
-      console.log(error_details);
+      console.log(JSON.stringify(error_details));
     });
 }
 function signInWithfacebook() {
@@ -348,17 +347,15 @@ function signInWithfacebook() {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then((result) => {
-      // console.log(result)
-      email = result.user.email;
-      email_verified = result.user.emailVerified;
-      uid = result.user.uid;
-      // idTokenSecure = result.credential.idToken;
-      photoUrl = result.user.photoURL;
-      auth_provider = result.additionalUserInfo.providerId;
-      console.log("Normal Facebook");
-      console.log(result);
-      //console.log(result.additionalUserInfo.providerId)
+    .then((userCredential) => {
+      email = userCredential.user.email;
+      email_verified = userCredential.user.emailVerified;
+      uid = userCredential.user.uid;
+      // idTokenSecure = userCredential.credential.idToken;
+      photoUrl = userCredential.user.photoURL;
+      auth_provider = userCredential.additionalUserInfo.providerId;
+      console.log("Facebook Signup");
+      //console.log(userCredential.additionalUserInfo.providerId)
       firebase
         .auth()
         .currentUser.getIdToken(/* forceRefresh */ true)
@@ -372,9 +369,10 @@ function signInWithfacebook() {
             photoUrl_user: photoUrl,
             auth_provider_user: auth_provider,
           };
-          console.log(user_details);
+
           localStorage.uid = uid_user;
           localStorage.idToken = idTokenSecure_user;
+          console.log(JSON.stringify(user_details));
           $.ajax({
             type: "POST",
             url: APIRoute + "register-user.php",
@@ -391,9 +389,9 @@ function signInWithfacebook() {
                   .auth()
                   .currentUser.delete()
                   .then(function () {
-                    window.location.replace("signup.html");
                     localStorage.uid = "";
                     localStorage.idToken = "";
+                    window.location.replace("signup.html");
                   })
                   .catch(function (error) {
                     console.log(error);
@@ -411,9 +409,9 @@ function signInWithfacebook() {
                 .auth()
                 .currentUser.delete()
                 .then(function () {
-                  window.location.replace("signup.html");
                   localStorage.uid = "";
                   localStorage.idToken = "";
+                  window.location.replace("signup.html");
                 })
                 .catch(function (error) {
                   console.log(error);
@@ -436,21 +434,20 @@ function signInWithfacebook() {
         email: error.email,
         credential: error.credential,
       };
-      console.log(error_details);
+      console.log(JSON.stringify(error_details));
       firebase
         .auth()
         .currentUser.linkWithPopup(provider)
-        .then(function (result) {
+        .then(function (userCredential) {
           // Accounts successfully linked.
-          email = result.user.email;
-          email_verified = result.user.emailVerified;
-          uid = result.user.uid;
-          idTokenSecure = result.credential.idToken;
-          photoUrl = result.user.photoURL;
-          auth_provider = result.additionalUserInfo.providerId;
+          email = userCredential.user.email;
+          email_verified = userCredential.user.emailVerified;
+          uid = userCredential.user.uid;
+          idTokenSecure = userCredential.credential.idToken;
+          photoUrl = userCredential.user.photoURL;
+          auth_provider = userCredential.additionalUserInfo.providerId;
           console.log("Linked Facebook");
-          console.log(result);
-          console.log(result.additionalUserInfo.providerId);
+          console.log(userCredential.additionalUserInfo.providerId);
           firebase
             .auth()
             .currentUser.getIdToken(/* forceRefresh */ true)
@@ -464,7 +461,7 @@ function signInWithfacebook() {
                 photoUrl_user: photoUrl,
                 auth_provider_user: auth_provider,
               };
-              console.log(user_details);
+              console.log(JSON.stringify(user_details));
               $.ajax({
                 type: "POST",
                 url: APIRoute + "register-user.php",
@@ -481,9 +478,9 @@ function signInWithfacebook() {
                       .auth()
                       .currentUser.delete()
                       .then(function () {
-                        window.location.replace("signup.html");
                         localStorage.uid = "";
                         localStorage.idToken = "";
+                        window.location.replace("signup.html");
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -491,7 +488,7 @@ function signInWithfacebook() {
                   } else if (parsedResponse == "invalid-auth") {
                     window.location.replace("index.html");
                   } else {
-                    window.location.replace("getDetails.html");
+                    window.location.replace("getdetails.html");
                   }
                 },
 
@@ -501,9 +498,9 @@ function signInWithfacebook() {
                     .auth()
                     .currentUser.delete()
                     .then(function () {
-                      window.location.replace("signup.html");
                       localStorage.uid = "";
                       localStorage.idToken = "";
+                      window.location.replace("signup.html");
                     })
                     .catch(function (error) {
                       console.log(error);
