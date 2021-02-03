@@ -10,18 +10,18 @@ firebase.auth().onAuthStateChanged(function (userauth) {
         uid: localStorage.uid,
         token: localStorage.idToken,
       },
-      success: function (res) {
-        var data = JSON.parse(res);
-        if (data == "invalid_auth" || data == "failed") {
+      success: function (response) {
+        var parsedResponse = JSON.parse(response);
+        if (parsedResponse == "invalid_auth" || parsedResponse == "failed") {
           // window.location.replace("index.html");
           logoutpage();
         } else {
-          document.getElementById("username-sub1").innerHTML = data.username;
+          document.getElementById("username-sub1").innerHTML =
+            parsedResponse.username;
         }
       },
       error: function (error) {
         console.log(error);
-        // window.location.replace("index.html");
         logoutpage();
       },
     });
@@ -82,6 +82,7 @@ function userDate(input) {
 
   return day + "/" + month + "/" + year;
 }
+
 function addTimes(startTime, endTime) {
   var times = [0, 0, 0];
   var max = times.length;
