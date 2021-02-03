@@ -166,7 +166,7 @@ function bookAppointment(Slot) {
     },
     success: function (response) {
       var parsedResponse = JSON.parse(response);
-      if (json_response.status == "true") {
+      if (parsedResponse.status == "true") {
         document.getElementById("main").innerHTML =
           '<div class="row"><div class="col-12"><div class="page-title-box"><div class="row"><h4 class="page-title">Appointment</h4><i class="page-title card-pricing-icon mdi mdi-chevron-double-right mr-1 "style="font-size: 25px;"></i><h4 class="page-title text-primary">Payment</h4></div></div></div></div><div class="container-fluid"><div class="row justify-content-center"><div class="row"> <div class="col-lg-12"><div class="card" style="min-width: 400px;"><div class="card-body text-center"><h4 class="header-title mb-3">Payment Details</h4><div class="table-responsive text-left"><table class="table mb-0"> <thead class="thead-light"> <tr> <th>Info</th><th>Details</th></tr></thead><tbody><tr><td>Slot</td><td>' +
           (Slot - 5) +
@@ -182,7 +182,7 @@ function bookAppointment(Slot) {
           convertedDate +
           "</td> </tr><tr><td>Time</td><td>" +
           startTime +
-          '</td></tr><tr><td><b>Cost</b></td><td><b>$ 5</b></td></tr></tbody></table> </div><button class="btn btn-outline-success mt-4 mb-2 btn-rounded" onclick="makePayment()" style="font-size: 20px;"><i class="uil-money-withdrawal"></i> Proceed to  Pay</button></div></div></div></div></div></div>';
+          '</td></tr><tr><td><b>Cost</b></td><td><b>$ 5</b></td></tr></tbody></table> </div><button class="btn btn-outline-primary btn-block mt-4 mb-2" onclick="makePayment()" style="font-size: 20px;"><i class="uil-money-withdrawal"></i> Proceed to Pay</button></div></div></div></div></div></div>';
       } else {
         document.getElementById("slot").innerHTML =
           '<p style="text-align:center;font-weight: 200;font-size:20px;color:#ff6347"><br>' +
